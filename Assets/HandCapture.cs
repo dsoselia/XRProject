@@ -11,10 +11,28 @@ public class HandCapture : MonoBehaviour
     public int frameRate = 1;
     private int _frameCounter = 0;
     private float _timeCounter = 0f;
+    
+    // create string current recognitions
+
+    public string currentRecognitions = "";
+    //public string target
+    public string target = "";
 
     void Start()
     {
         
+    }
+    
+    int checkPrediction(string prediction)
+    {
+        if (prediction == target)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     void Update()
@@ -36,7 +54,7 @@ public class HandCapture : MonoBehaviour
 
         byte[] bytes = texture2D.EncodeToJPG();
         string filePath = savePath + "HandCapture_" + _frameCounter.ToString("0000") + ".jpg";
-        File.WriteAllBytes(filePath, bytes); 
+        // File.WriteAllBytes(filePath, bytes); 
 
         // To feed the texture data to your machine learning model, you can use the "bytes" variable here
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
@@ -51,12 +69,13 @@ public class HandCapture : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Image uploaded successfully.");
-                Debug.Log(www.downloadHandler.text);
+                // Debug.Log("Image uploaded successfully.");
+                // Debug.Log(www.downloadHandler.text);
             }
             else
             {
-                Debug.Log("Error uploading image: " + www.error);
+                // Debug.Log("Error uploading image: " + www.error);
+
             }
         }
 
