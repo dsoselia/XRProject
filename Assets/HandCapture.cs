@@ -11,6 +11,7 @@ public class HandCapture : MonoBehaviour
     public int frameRate = 1;
     private int _frameCounter = 0;
     private float _timeCounter = 0f;
+    public string capturedText = "";
     
     // create string current recognitions
 
@@ -69,12 +70,11 @@ public class HandCapture : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                // Debug.Log("Image uploaded successfully.");
-                // Debug.Log(www.downloadHandler.text);
+                capturedText+= www.downloadHandler.text;
             }
             else
             {
-                // Debug.Log("Error uploading image: " + www.error);
+                Debug.Log("Error uploading image: " + www.error);
 
             }
         }
